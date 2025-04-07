@@ -9,11 +9,11 @@ using Vector3 = UnityEngine.Vector3;
 
 
 public class MeshGenerator : MonoBehaviour
-
+{
     public Material material;  // Material to render the cube with
     private Mesh cubeMesh;     // Stores the generated cube mesh data
     private Matrix4x4 matrix;  // Transformation matrix for position, rotation, and scale
-    
+
     // Movement parameters
     public float moveSpeed = 5f;     // Speed for left/right movement
     public float rotateSpeed = 100f; // Speed for rotation
@@ -41,7 +41,7 @@ public class MeshGenerator : MonoBehaviour
             new Vector3( 0.5f, -0.5f, -0.5f), // 1: back-right-bottom
             new Vector3( 0.5f,  0.5f, -0.5f), // 2: back-right-top
             new Vector3(-0.5f,  0.5f, -0.5f), // 3: back-left-top
-            
+
             // Top face vertices (counter-clockwise)
             new Vector3(-0.5f, -0.5f,  0.5f), // 4: front-left-bottom
             new Vector3( 0.5f, -0.5f,  0.5f), // 5: front-right-bottom
@@ -50,29 +50,28 @@ public class MeshGenerator : MonoBehaviour
         };
 
         // Define triangles for each face (2 triangles per face, 6 vertices per face)
-        // Note: Triangle because it is the simplest possible polygon (3 vertices) and it is mathematically guaranteed to be coplanar (plus all 3d models rendering is made with triangles)
         int[] triangles = new int[36]
         {
             // Front face (facing -Z)
             0, 2, 1, // First triangle
             0, 3, 2, // Second triangle
-            
+
             // Back face (facing +Z)
             4, 5, 6, // First triangle
             4, 6, 7, // Second triangle
-            
+
             // Left face (facing -X)
             0, 4, 7, // First triangle
             0, 7, 3, // Second triangle
-            
+
             // Right face (facing +X)
             1, 2, 6, // First triangle
             1, 6, 5, // Second triangle
-            
+
             // Top face (facing +Y)
             3, 7, 6, // First triangle
             3, 6, 2, // Second triangle
-            
+
             // Bottom face (facing -Y)
             0, 1, 5, // First triangle
             0, 5, 4  // Second triangle
@@ -81,7 +80,7 @@ public class MeshGenerator : MonoBehaviour
         // Assign vertices and triangles to the mesh
         cubeMesh.vertices = vertices;
         cubeMesh.triangles = triangles;
-        
+
         // Recalculate normals for proper lighting calculations
         cubeMesh.RecalculateNormals();
     }
